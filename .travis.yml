@@ -4,18 +4,18 @@ services:
   - docker
 
 before_install:
-  - docker build -t del/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t ekady/react-test -f ./client/Dockerfile.dev ./client
 
 script: 
-  - docker run -e CI=true del/react-test npm run test
+  - docker run -e CI=true ekady/react-test npm run test
 
 after_success: 
-  - docker build -t del/multi-client ./client
-  - docker build -t del/multi-nginx ./nginx
-  - docker build -t del/multi-worker ./worker
-  - docker build -t del/multi-server ./server
+  - docker build -t ekady/multi-client ./client
+  - docker build -t ekady/multi-nginx ./nginx
+  - docker build -t ekady/multi-worker ./worker
+  - docker build -t ekady/multi-server ./server
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push del/multi-client
-  - docker push del/multi-nginx
-  - docker push del/multi-worker
-  - docker push del/multi-server
+  - docker push ekady/multi-client
+  - docker push ekady/multi-nginx
+  - docker push ekady/multi-worker
+  - docker push ekady/multi-server
