@@ -19,3 +19,15 @@ after_success:
   - docker push ekady/multi-nginx
   - docker push ekady/multi-worker
   - docker push ekady/multi-server
+
+deploy:
+  provider: elasticbeanstalk
+  region: ap-southeast-1
+  app: multi-docker
+  env: Multi-docker-env
+  bucket_name: 	$AWS_BUCKET_NAME
+  bucket_path: docker-multi
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
